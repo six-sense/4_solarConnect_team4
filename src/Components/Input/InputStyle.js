@@ -23,7 +23,7 @@ export const Input = styled.input`
 
 export const InputNumber = styled(Input).attrs({
   type: 'text',
-  placeholder: '숫자를 입력해주세요',
+  placeholder: '숫자를 입력해주세요   ex)1,2,3,4,5',
 })``;
 
 export const style = {

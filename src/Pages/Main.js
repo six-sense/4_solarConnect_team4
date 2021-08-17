@@ -10,20 +10,22 @@ const Main = () => {
 
   return (
     <Layout>
-      <Timer />
-      <Input setData={setData} />
-      <StartButton
-        data={data}
-        setAscendedArray={setAscendedArray}
-        setDescendedArray={setDescendedArray}
-      />
-      <Result sortedArray={ascendedArray} />
-      <Result sortedArray={descendedArray} />
-      <Timer />
+      <Wrap>
+        <Timer />
+        <Input setData={setData} />
+        <StartButton
+          data={data}
+          setAscendedArray={setAscendedArray}
+          setDescendedArray={setDescendedArray}
+        />
+        <Result sortedArray={ascendedArray} up={true} />
+        <Result sortedArray={descendedArray} up={false} />
+        <Timer />
+      </Wrap>
     </Layout>
   );
 };
 
 export default Main;
 
-const { Layout } = style;
+const { Layout, Wrap } = style;

@@ -9,10 +9,15 @@ const Input = (props) => {
     setData(e.target.value);
   };
 
+  // const onKeyPressEnter = (e) => {
+  //   e.preventDefault();
+  //   onChangeNumber(e);
+  // }
+
   return (
-    <div>
+    <>
       <InputNumber onChange={onChangeNumber} />
-    </div>
+    </>
   );
 };
 
