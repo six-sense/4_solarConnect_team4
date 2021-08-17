@@ -21,10 +21,14 @@ export default function splitNumber(numStr) {
       sign = -1;
       number = number.slice(1);
     }
+    if (number.length === 0) {
+      message = '"-"만 올 수 없습니다.';
+      break;
+    }
     for (let j = 0; j < number.length; j++) {
       const temp = number[j];
       if (temp === '-') {
-        message = '"-"가 2개 이상 들어있습니다.';
+        message = '"-"가 올바르지 않은 곳에 있습니다.';
         break;
       }
       answer = answer * 10 + parseInt(temp);
