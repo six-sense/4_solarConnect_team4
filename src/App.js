@@ -1,5 +1,6 @@
-import React from "react";
+import React from 'react';
+import Main from 'Pages';
 
-export function App() {
-  return <div>Hello</div>;
+export default function App() {
+  return <Main />;
 }
