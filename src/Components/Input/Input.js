@@ -3,20 +3,22 @@ import { style } from './InputStyle';
 import PropTypes from 'prop-types';
 
 const Input = (props) => {
-  const { setData } = props;
+  const { setInputData, setKeyEnter } = props;
 
   const onChangeNumber = (e) => {
-    setData(e.target.value);
+    setInputData(e.target.value);
   };
 
-  // const onKeyPressEnter = (e) => {
-  //   e.preventDefault();
-  //   onChangeNumber(e);
-  // }
+  const onKeyPressEnter = (e) => {
+    if (e.key === 'Enter') {
+      setKeyEnter(true);
+    }
+    onChangeNumber(e);
+  };
 
   return (
     <>
-      <InputNumber onChange={onChangeNumber} />
+      <InputNumber onChange={onChangeNumber} onKeyPress={onKeyPressEnter} />
     </>
   );
 };
@@ -26,5 +28,6 @@ export default Input;
 const { InputNumber } = style;
 
 Input.propTypes = {
-  setData: PropTypes.func,
+  setInputData: PropTypes.func,
+  setKeyEnter: PropTypes.func,
 };

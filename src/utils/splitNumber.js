@@ -1,4 +1,10 @@
 export default function splitNumber(numStr) {
+  if (!numStr.length) {
+    return {
+      message: '값을 입력해주세요.',
+      numArr: [],
+    };
+  }
   const tempArr = numStr.split(',');
   const numArr = [];
   let message = '';
@@ -8,7 +14,7 @@ export default function splitNumber(numStr) {
     let number = tempArr[i];
     let answer = 0;
     if (number.length === 0) {
-      message = 'comma가 연속으로 있습니다.';
+      message = '올바르지 않은 양식입니다.';
       break;
     }
     if (number[0] === '-') {

@@ -1,16 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { style } from './StartButtonStyle';
 import PropTypes from 'prop-types';
-import { quickSort, reverseArray, splitNumber } from 'utils';
+import { quickSort, reverseArray, splitNumber, checkValidation } from 'utils';
 import { Toast } from 'Components';
 
 const StartButton = (props) => {
-  const { data, setAscendedArray, setDescendedArray } = props;
-  // const [sortFunction, setSortFunction] = useState(null);
+  const {
+    inputData,
+    setAscendedArray,
+    setDescendedArray,
+    keyEnter,
+    setKeyEnter,
+  } = props;
   const [toast, setToast] = useState({
     status: false,
     msg: '',
   });
+
+  const onClickStart = useCallback(() => {
+    setAscendedArray([]);
+    setDescendedArray([]);
+    if (!checkValidation(inputData)) {
+      setToast((prevToast) => ({
+        ...prevToast,
+        status: true,
+        msg: '양식에 알맞게 입력해주세요. ex)1,-1,3,-4,5',
+      }));
+      return;
+    }
+
+    const { message, numArr } = splitNumber(inputData);
+    if (message) {
+      setToast((prevToast) => ({
+        ...prevToast,
+        status: true,
+        msg: message,
+      }));
+      return;
+    }
+    quickSort(numArr, 0, numArr.length - 1);
+    setAscendedArray(numArr);
+    setTimeout(() => {
+      setDescendedArray(reverseArray(numArr));
+    }, 3000);
+  }, [inputData, setAscendedArray, setDescendedArray]);
+
+  useEffect(() => {
+    if (keyEnter === true) {
+      onClickStart();
+      setKeyEnter(false);
+    }
+  }, [keyEnter, onClickStart, setKeyEnter]);
 
   useEffect(() => {
     if (toast.status) {
@@ -20,40 +60,6 @@ const StartButton = (props) => {
       return () => clearTimeout(timeInterver);
     }
   }, [toast]);
-
-  const onClickStart = () => {
-    if (!checkValidation(data)) {
-      setToast((prevToast) => ({
-        ...prevToast,
-        status: true,
-        msg: '양식에 알맞게 입력해주세요. ex)1,-1,3,-4,5',
-      }));
-      return;
-    }
-
-    const { message, numArr } = splitNumber(data);
-    if (message) {
-      setToast((prevToast) => ({
-        ...prevToast,
-        status: true,
-        msg: message,
-      }));
-    }
-    quickSort(numArr, 0, numArr.length - 1);
-    setAscendedArray(numArr);
-    setTimeout(() => {
-      setDescendedArray(reverseArray(numArr));
-    }, 3000);
-  };
-
-  const checkValidation = (data) => {
-    const regex = /[^-\d,]+/;
-    if (regex.test(data)) {
-      return false;
-    } else {
-      return true;
-    }
-  };
 
   return (
     <>
@@ -68,7 +74,9 @@ export default StartButton;
 const { CheckBtn } = style;
 
 StartButton.propTypes = {
-  data: PropTypes.string,
+  inputData: PropTypes.string,
   setAscendedArray: PropTypes.func,
   setDescendedArray: PropTypes.func,
+  keyEnter: PropTypes.bool,
+  setKeyEnter: PropTypes.func,
 };

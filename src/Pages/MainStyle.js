@@ -11,7 +11,6 @@ export const Wrap = styled.div`
   width: 480px;
   margin: 48px 0;
   padding: 0 15px;
-  margin-top: 50px;
 `;
 
 export const style = {

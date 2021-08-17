@@ -1,17 +1,19 @@
 import styled from 'styled-components';
 
-export const Button = styled.div`
+const Button = styled.div`
   ${({ theme }) => theme.flexSet()};
   height: 44px;
-  background-color: #0085fd;
+  background-color: black;
   cursor: pointer;
   color: #fff;
   font-size: 14px;
   border-radius: 6px;
+  font-weight: bold;
+  margin-bottom: 16px;
 `;
 
-export const CheckBtn = styled(Button)`
-  width: 100%;
+const CheckBtn = styled(Button)`
+  width: 50%;
 `;
 
 export const style = {

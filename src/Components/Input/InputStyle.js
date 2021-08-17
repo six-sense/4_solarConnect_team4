@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Input = styled.input`
+const Input = styled.input`
   margin: 0 auto;
   padding: 0 15px;
   width: 100%;
@@ -21,7 +21,7 @@ export const Input = styled.input`
   }
 `;
 
-export const InputNumber = styled(Input).attrs({
+const InputNumber = styled(Input).attrs({
   type: 'text',
   placeholder: '숫자를 입력해주세요   ex)1,2,3,4,5',
 })``;

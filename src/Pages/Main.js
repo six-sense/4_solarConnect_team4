@@ -3,24 +3,26 @@ import { Timer, Input, StartButton, Result } from 'Components';
 import { style } from './MainStyle';
 
 const Main = () => {
-  const [data, setData] = useState('');
-  //const [date, setDate] = useState('');
+  const [inputData, setInputData] = useState('');
   const [ascendedArray, setAscendedArray] = useState([]);
   const [descendedArray, setDescendedArray] = useState([]);
+  const [keyEnter, setKeyEnter] = useState(false);
 
   return (
     <Layout>
       <Wrap>
-        <Timer />
-        <Input setData={setData} />
+        <Timer language="ko-KR" />
+        <Input setInputData={setInputData} setKeyEnter={setKeyEnter} />
         <StartButton
-          data={data}
+          inputData={inputData}
           setAscendedArray={setAscendedArray}
           setDescendedArray={setDescendedArray}
+          keyEnter={keyEnter}
+          setKeyEnter={setKeyEnter}
         />
         <Result sortedArray={ascendedArray} up={true} />
         <Result sortedArray={descendedArray} up={false} />
-        <Timer />
+        <Timer language="en-US" />
       </Wrap>
     </Layout>
   );
